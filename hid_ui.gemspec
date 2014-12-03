@@ -18,6 +18,11 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails', '~> 3.2.21'
   spec.add_dependency 'hid_core'
 
+  spec.add_dependency 'jquery-rails'
+  spec.add_dependency 'bootstrap-sass', '~> 3.3.1'
+  spec.add_dependency 'sass-rails', '>= 3.2'
+  spec.add_dependency 'autoprefixer-rails'
+
   spec.add_development_dependency 'sqlite3'
   spec.add_development_dependency 'rspec-rails'
 end

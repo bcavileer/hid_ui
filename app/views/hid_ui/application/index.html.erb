@@ -1,0 +1,110 @@
+<div class='container'>
+  <div class='row clearfix'>
+    <div class='col-md-12 column'>
+      <form action='<%= identify_path %>' method='post' role='form'>
+        <div class='panel panel-default'>
+          <div class='panel-heading'>
+            <h3 class='panel-title'>
+              Identify
+            </h3>
+          </div>
+          <div class='panel-body'>
+            <div class='form-group'>
+              <input type='text' class='form-control' name='input' placeholder='Enter an input' autofocus>
+            </div>
+          </div>
+          <div class='panel-footer panel-footer-with-button clearfix'>
+            <%= flash[:identify] %>
+            <button type='submit' class='btn btn-primary pull-right'>Identify</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class='row clearfix'>
+    <div class='col-md-6 column'>
+      <div class='panel panel-default'>
+        <div class='panel-heading'>
+          <h3 class='panel-title'>
+            Identity Mappings
+          </h3>
+        </div>
+        <div class='panel-body'>
+          <table class='table table-striped'>
+            <thead>
+            <tr>
+              <th>Input</th>
+              <th>Identity</th>
+              <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @identities.each do |mapping| %>
+                <tr>
+                  <td><%= mapping.input %></td>
+                  <td><%= mapping.identity %></td>
+                  <td width='1'>
+                    <form action='<%= delete_path %>' method='post'>
+                      <input type='hidden' name='input' value='<%= mapping.input %>'>
+                      <input type='hidden' name='identity' value='<%= mapping.identity %>'>
+                      <button type='submit' class='btn btn-danger btn-xs pull-right'>X</button>
+                    </form>
+                  </td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class='panel-footer panel-footer-with-button'>
+          <%= flash[:map] %>
+          <%= flash[:delete] %>
+          &nbsp;
+        </div>
+      </div>
+    </div>
+    <div class='col-md-6 column'>
+      <div class='panel panel-default'>
+        <div class='panel-heading'>
+          <h3 class='panel-title'>
+            Misses
+          </h3>
+        </div>
+        <div class='panel-body'>
+          <table class='table table-striped'>
+            <thead>
+            <tr>
+              <th>Miss</th>
+              <th>Add Identity</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @misses.each do |miss| %>
+                <form class='form-inline' action='<%= map_path %>' method='post'>
+                  <tr>
+                    <td><%= miss %></td>
+                    <td>
+                      <div class='form-group form-group-sm'>
+                        <input type='hidden' name='input' value='<%= miss %>'>
+                        <input type='text' class='form-control' name='identity' placeholder='Enter an identity'>
+                      </div>
+                    </td>
+                    <td>
+                      <button type='submit' class='btn btn-primary btn-xs pull-right'>Identify</button>
+                    </td>
+                  </tr>
+                </form>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class='panel-footer panel-footer-with-button clearfix'>
+          <form action='<%= clear_path %>' method='post'>
+            <%= flash[:clear] %>
+            <button type='submit' class='btn btn-danger pull-right'>Clear</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
